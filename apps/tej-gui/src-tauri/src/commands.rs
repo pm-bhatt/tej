@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
 use serde::Serialize;
-use tej_core::{ProgressUpdate, TestConfig, TestPhase};
 use tauri::{AppHandle, Emitter, State};
+use tej_core::{ProgressUpdate, TestConfig, TestPhase};
 
 use crate::state::AppState;
 

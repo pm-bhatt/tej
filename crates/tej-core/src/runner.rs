@@ -27,8 +27,7 @@ pub async fn run_speed_test(
     let progress_ref = progress.as_ref();
 
     // Phase 1: Latency + Jitter
-    let (latency_result, server_location) =
-        measure_latency(&client, config, progress_ref).await?;
+    let (latency_result, server_location) = measure_latency(&client, config, progress_ref).await?;
     result.latency = Some(latency_result);
     result.server_location = server_location;
 

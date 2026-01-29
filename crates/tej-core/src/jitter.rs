@@ -4,10 +4,7 @@ pub fn calculate_jitter(samples: &[f64]) -> f64 {
         return 0.0;
     }
 
-    let sum: f64 = samples
-        .windows(2)
-        .map(|w| (w[1] - w[0]).abs())
-        .sum();
+    let sum: f64 = samples.windows(2).map(|w| (w[1] - w[0]).abs()).sum();
 
     sum / (samples.len() - 1) as f64
 }

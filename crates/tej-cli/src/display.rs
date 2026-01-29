@@ -30,24 +30,15 @@ pub fn print_results(result: &SpeedTestResult) {
     }
 
     if let Some(ref dl) = result.download {
-        table.add_row(vec![
-            "Download".to_string(),
-            format!("{:.2} Mbps", dl.mbps),
-        ]);
+        table.add_row(vec!["Download".to_string(), format!("{:.2} Mbps", dl.mbps)]);
     }
 
     if let Some(ref ul) = result.upload {
-        table.add_row(vec![
-            "Upload".to_string(),
-            format!("{:.2} Mbps", ul.mbps),
-        ]);
+        table.add_row(vec!["Upload".to_string(), format!("{:.2} Mbps", ul.mbps)]);
     }
 
     if let Some(loss) = result.packet_loss {
-        table.add_row(vec![
-            "Packet Loss".to_string(),
-            format!("{:.1}%", loss),
-        ]);
+        table.add_row(vec!["Packet Loss".to_string(), format!("{:.1}%", loss)]);
     }
 
     println!("{table}");

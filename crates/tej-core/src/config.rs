@@ -25,10 +25,10 @@ impl Default for TestConfig {
             latency_url: "https://speed.cloudflare.com/__down".to_string(),
             parallel_connections: 6,
             download_sizes: vec![
-                100_000,       // 100KB warmup
-                1_000_000,     // 1MB
-                10_000_000,    // 10MB
-                25_000_000,    // 25MB
+                100_000,    // 100KB warmup
+                1_000_000,  // 1MB
+                10_000_000, // 10MB
+                25_000_000, // 25MB
             ],
             upload_size: 10_000_000, // 10MB
             latency_samples: 20,

@@ -8,7 +8,10 @@ use indicatif::{ProgressBar, ProgressStyle};
 use tej_core::{ProgressUpdate, TestConfig, TestPhase};
 
 #[derive(Parser)]
-#[command(name = "tej", about = "Tej - Honest internet speed test using Cloudflare CDN")]
+#[command(
+    name = "tej",
+    about = "Tej - Honest internet speed test using Cloudflare CDN"
+)]
 struct Args {
     /// Output format
     #[arg(long, default_value = "text", value_parser = ["text", "json"])]
@@ -91,7 +94,10 @@ async fn main() {
 
     if !is_json {
         println!("Tej - Honest Speed Test");
-        println!("Testing with {} parallel connections...", config.parallel_connections);
+        println!(
+            "Testing with {} parallel connections...",
+            config.parallel_connections
+        );
         println!();
     }
 

@@ -30,10 +30,7 @@ impl AppState {
     }
 
     pub fn get_history(&self) -> Vec<SpeedTestResult> {
-        self.history
-            .lock()
-            .map(|h| h.clone())
-            .unwrap_or_default()
+        self.history.lock().map(|h| h.clone()).unwrap_or_default()
     }
 
     pub fn save_result(&self, result: SpeedTestResult) {

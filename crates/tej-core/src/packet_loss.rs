@@ -15,11 +15,7 @@ pub async fn measure_packet_loss(
     let mut failures = 0u32;
 
     for i in 0..count {
-        let result = tokio::time::timeout(
-            timeout,
-            client.get(&url).send(),
-        )
-        .await;
+        let result = tokio::time::timeout(timeout, client.get(&url).send()).await;
 
         match result {
             Ok(Ok(resp)) => {
