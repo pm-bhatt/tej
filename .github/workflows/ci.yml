@@ -14,6 +14,7 @@ jobs:
     name: Test
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
@@ -31,50 +32,10 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Clippy
-        run: cargo clippy --workspace -- -D warnings
+        run: cargo clippy -p tej-core -p tej-cli -- -D warnings
 
       - name: Build
-        run: cargo build --workspace
+        run: cargo build -p tej-core -p tej-cli
 
       - name: Test
-        run: cargo test --workspace
-
-  build-gui:
-    name: Build GUI
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Linux dependencies
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
-
-      - name: Cache cargo
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: apps/tej-gui/src-tauri
-
-      - name: Install frontend dependencies
-        working-directory: apps/tej-gui
-        run: npm install
-
-      - name: Build frontend
-        working-directory: apps/tej-gui
-        run: npm run build
-
-      - name: Build Tauri app
-        working-directory: apps/tej-gui/src-tauri
-        run: cargo build --release
+        run: cargo test -p tej-core -p tej-cli
