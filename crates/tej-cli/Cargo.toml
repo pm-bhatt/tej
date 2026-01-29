@@ -13,7 +13,7 @@ name = "tej"
 path = "src/main.rs"
 
 [dependencies]
-tej-core = { path = "../tej-core" }
+tej-core = { path = "../tej-core", version = "0.1.0" }
 tokio = { workspace = true }
 serde_json = { workspace = true }
 clap = { version = "4", features = ["derive"] }
