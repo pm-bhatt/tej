@@ -34,6 +34,11 @@ Most speed test tools use **compressible data** that ISPs can optimize in transi
 brew tap pm-bhatt/tej
 brew install tej
 ```
+or single line 
+
+```bash
+brew install pm-bhatt/tej/tej
+```
 
 ### Cargo
 
