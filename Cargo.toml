@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/tej-core",
+    "crates/tej-cli",
+    "apps/tej-gui/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/pm-bhattt/tej"
+description = "Honest internet speed test using incompressible data"
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8"

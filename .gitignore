@@ -1,0 +1,57 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Node.js
+node_modules/
+dist/
+.npm
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Tauri
+/apps/tej-gui/src-tauri/target/
+/apps/tej-gui/src-tauri/WixTools/
+/apps/tej-gui/src-tauri/icons/icon.ico
+/apps/tej-gui/src-tauri/icons/icon.icns
+
+# Build artifacts
+*.app
+*.dmg
+*.exe
+*.msi
+*.deb
+*.AppImage
+
+# Test artifacts
+*.profraw
+coverage/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp

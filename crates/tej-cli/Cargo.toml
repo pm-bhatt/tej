@@ -1,0 +1,22 @@
+[package]
+name = "tej-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Fast, honest internet speed test CLI"
+keywords = ["speedtest", "cli", "network", "bandwidth"]
+categories = ["command-line-utilities", "network-programming"]
+
+[[bin]]
+name = "tej"
+path = "src/main.rs"
+
+[dependencies]
+tej-core = { path = "../tej-core" }
+tokio = { workspace = true }
+serde_json = { workspace = true }
+clap = { version = "4", features = ["derive"] }
+indicatif = "0.17"
+console = "0.15"
+comfy-table = "7"
