@@ -10,7 +10,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/pm-bhattt/tej/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/pm-bhatt/tej/issues)
 2. If not, create a new issue with:
    - Clear, descriptive title
    - Steps to reproduce
@@ -46,7 +46,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
 
 ```bash
 # Clone the repo
-git clone https://github.com/pm-bhattt/tej.git
+git clone https://github.com/pm-bhatt/tej.git
 cd tej
 
 # Build all crates
@@ -128,7 +128,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ## Getting Help
 
-- Open a [Discussion](https://github.com/pm-bhattt/tej/discussions) for questions
+- Open a [Discussion](https://github.com/pm-bhatt/tej/discussions) for questions
 - Join our community chat (coming soon)
 
 ## License

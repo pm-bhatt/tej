@@ -7,9 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/pm-bhattt/tej/actions"><img src="https://img.shields.io/github/actions/workflow/status/pm-bhattt/tej/ci.yml?style=flat-square" alt="Build Status"></a>
-  <a href="https://github.com/pm-bhattt/tej/releases"><img src="https://img.shields.io/github/v/release/pm-bhattt/tej?style=flat-square" alt="Release"></a>
-  <a href="https://github.com/pm-bhattt/tej/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License"></a>
+  <a href="https://github.com/pm-bhatt/tej/actions"><img src="https://img.shields.io/github/actions/workflow/status/pm-bhatt/tej/ci.yml?style=flat-square" alt="Build Status"></a>
+  <a href="https://github.com/pm-bhatt/tej/releases"><img src="https://img.shields.io/github/v/release/pm-bhatt/tej?style=flat-square" alt="Release"></a>
+  <a href="https://github.com/pm-bhatt/tej/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License"></a>
 </p>
 
 ---
@@ -39,7 +39,7 @@ cargo install tej-cli
 
 ### GUI App
 
-Download from [Releases](https://github.com/pm-bhattt/tej/releases) for:
+Download from [Releases](https://github.com/pm-bhatt/tej/releases) for:
 - macOS (Apple Silicon & Intel)
 - Windows
 - Linux (AppImage, deb)
@@ -49,7 +49,7 @@ Download from [Releases](https://github.com/pm-bhattt/tej/releases) for:
 ### Build from Source
 
 ```bash
-git clone https://github.com/pm-bhattt/tej.git
+git clone https://github.com/pm-bhatt/tej.git
 cd tej
 
 # CLI only
