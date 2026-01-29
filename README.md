@@ -28,14 +28,22 @@ Most speed test tools use **compressible data** that ISPs can optimize in transi
 
 ## Installation
 
-### CLI (Recommended)
+### Homebrew (macOS/Linux)
 
 ```bash
-# Using Cargo
-cargo install tej-cli
-
-# Or download pre-built binary from releases
+brew tap pm-bhatt/tej
+brew install tej
 ```
+
+### Cargo
+
+```bash
+cargo install tej-cli
+```
+
+### Download Binary
+
+Download pre-built binaries from [Releases](https://github.com/pm-bhatt/tej/releases).
 
 ### GUI App
 
