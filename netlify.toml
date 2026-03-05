@@ -1,0 +1,48 @@
+[build]
+  # Build command - installs Rust toolchain, wasm-pack, builds WASM
+  command = """
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable && \
+    export PATH="$HOME/.cargo/bin:$PATH" && \
+    rustup target add wasm32-unknown-unknown && \
+    cargo install wasm-pack && \
+    cd crates/tej-core && \
+    cp Cargo-wasm.toml Cargo.toml && \
+    cp src/lib-wasm.rs src/lib.rs && \
+    wasm-pack build --target web --out-dir ../../apps/tej-web/pkg && \
+    cd ../.. && \
+    cp crates/tej-core/Cargo-native.toml crates/tej-core/Cargo.toml && \
+    cp crates/tej-core/src/lib-native.rs crates/tej-core/src/lib.rs
+  """
+  publish = "apps/tej-web"
+
+[build.environment]
+  NODE_VERSION = "20"
+  RUSTUP_HOME = "/opt/buildhome/.rustup"
+  CARGO_HOME = "/opt/buildhome/.cargo"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
+
+[context.production]
+  environment = { NODE_ENV = "production" }

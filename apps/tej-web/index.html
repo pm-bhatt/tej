@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tej - Honest Internet Speed Test</title>
+    <meta name="description" content="Tej - An honest internet speed test using incompressible data. Open source, no telemetry, lightweight.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/knadh/oat@latest/oat.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --bg-dark: #0f0f1a;
+            --card-bg: #1a1a2e;
+            --text: #ffffff;
+            --text-muted: #888888;
+        }
+        
+        body {
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin: 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        .tagline {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .gauge-container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 24px;
+            border: 1px solid #2a2a3e;
+        }
+        
+        .gauge {
+            width: 280px;
+            height: 160px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        
+        .gauge-value {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .gauge-unit {
+            font-size: 18px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .gauge-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 16px;
+        }
+        
+        .phase-indicator {
+            color: var(--primary);
+            font-size: 14px;
+            margin: 16px 0;
+            min-height: 24px;
+        }
+        
+        .start-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 16px 64px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 24px 0;
+        }
+        
+        .start-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .start-btn:disabled {
+            background: #1e3a5f;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #2a2a3e;
+        }
+        
+        .result-card.highlight {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1e3a5f 100%);
+        }
+        
+        .result-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .result-value {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .comparison-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+            border: 1px solid #2a2a3e;
+        }
+        
+        .comparison-section h2 {
+            font-size: 20px;
+            margin: 0 0 16px 0;
+            text-align: center;
+        }
+        
+        .comparison-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a3e;
+        }
+        
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .check { color: #22c55e; }
+        .cross { color: #ef4444; }
+        
+        .why-tej {
+            background: linear-gradient(135deg, #1e3a5f 0%, var(--card-bg) 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .why-tej h3 {
+            font-size: 16px;
+            margin: 0 0 12px 0;
+        }
+        
+        .why-tej ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        
+        .why-tej li {
+            margin-bottom: 8px;
+        }
+        
+        .error {
+            color: #ef4444;
+            text-align: center;
+            margin: 16px 0;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 8px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .wasm-loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #2a2a3e;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tej</h1>
+            <div class="subtitle">Honest Internet Speed Test</div>
+            <div class="tagline">tej (तेज़) — Hindi for "fast, swift"</div>
+        </header>
+        
+        <div id="wasm-loading" class="wasm-loading">
+            <div class="loading"></div>
+            <p>Loading speed test engine...</p>
+        </div>
+        
+        <div id="app-content" class="hidden">
+            <div class="gauge-container">
+                <div class="gauge">
+                    <canvas id="speed-gauge" width="280" height="160"></canvas>
+                </div>
+                <div class="gauge-value" id="gauge-value">0</div>
+                <div class="gauge-unit" id="gauge-unit">Mbps</div>
+                <div class="gauge-label" id="gauge-label">Ready</div>
+                <div class="phase-indicator" id="phase-indicator"></div>
+                
+                <button id="start-btn" class="start-btn">Start Test</button>
+                <div id="error-message" class="error hidden"></div>
+            </div>
+            
+            <div id="results" class="hidden">
+                <div class="results-grid" id="results-grid"></div>
+            </div>
+            
+            <div class="comparison-section">
+                <h2>Why Tej?</h2>
+                <p>Most speed tests use compressible data that ISPs can optimize, giving inflated results. Tej uses incompressible random data for honest measurements.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Tej</th>
+                            <th>Ookla</th>
+                            <th>Fast.com</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Incompressible data</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Open source</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>No telemetry</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                        </tr>
+                        <tr>
+                            <td>Lightweight</td>
+                            <td class="check">~8KB</td>
+                            <td class="cross">~200MB app</td>
+                            <td>Web only</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="why-tej">
+                    <h3>How Tej is different</h3>
+                    <ul>
+                        <li><strong>Incompressible data:</strong> Uses random bytes that can't be compressed by ISP optimization</li>
+                        <li><strong>Multiple parallel connections:</strong> Simulates real-world usage patterns</li>
+                        <li><strong>Comprehensive metrics:</strong> Download, upload, latency, jitter, and packet loss</li>
+                        <li><strong>Cloudflare edge:</strong> Tests against 300+ global locations for representative results</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Open source • No telemetry • <a href="https://github.com/pm-bhatt/tej" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+    
+    <script type="module" src="app.js"></script>
+</body>
+</html>
