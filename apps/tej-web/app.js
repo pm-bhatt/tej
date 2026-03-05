@@ -167,7 +167,7 @@ async function startTest() {
         window.onTestProgress = onProgress;
         
         // Run the test
-        const result = await wasmModule.runSpeedTestWithProgress(progressCallback);
+        const result = await wasmModule.runSpeedTest(progressCallback);
         
         // Display results
         displayResults(result);
