@@ -63,7 +63,7 @@ Download from [Releases](https://github.com/pm-bhatt/tej/releases) for:
 
 Run directly in your browser - no installation needed:
 
-**Live URL**: https://tej-speed.pages.dev (or deploy your own)
+**Live URL**: https://tej.pmbhatt.com/ (or deploy your own)
 
 Features:
 - Same honest measurements as CLI
