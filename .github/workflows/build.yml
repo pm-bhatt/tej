@@ -13,24 +13,37 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Install Rust
-      run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-        rustup target add wasm32-unknown-unknown
-      shell: bash
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        command: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          rustup target add wasm32-unknown-unknown
+      env:
+        SHELL: /bin/bash
     
     - name: Install wasm-pack
-      run: cargo install wasm-pack
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        command: cargo install wasm-pack
     
     - name: Build WASM
-      run: |
-        cd crates/tej-core
-        cp Cargo-wasm.toml Cargo.toml
-        cp src/lib-wasm.rs src/lib.rs
-        wasm-pack build --target web --out-dir ../../apps/tej-web/pkg
-        cd ../..
-        cp crates/tej-core/Cargo-native.toml crates/tej-core/Cargo.toml
-        cp crates/tej-core/src/lib-native.rs crates/tej-core/src/lib.rs
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        command: |
+          cd crates/tej-core
+          cp Cargo-wasm.toml Cargo.toml
+          cp src/lib-wasm.rs src/lib.rs
+          wasm-pack build --target web --out-dir ../../apps/tej-web/pkg
+          cd ../..
+          cp crates/tej-core/Cargo-native.toml crates/tej-core/Cargo.toml
+          cp crates/tej-core/src/lib-native.rs crates/tej-core/src/lib.rs
     
     - name: Upload pkg artifacts
       uses: actions/upload-artifact@v4
