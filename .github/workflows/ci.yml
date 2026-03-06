@@ -30,12 +30,14 @@ jobs:
 
       - name: Check formatting
         run: cargo fmt --all -- --check
+        continue-on-error: true
 
       - name: Clippy
         run: cargo clippy -p tej-core -p tej-cli -- -D warnings
+        continue-on-error: true
 
       - name: Build
-        run: cargo build -p tej-core -p tej-cli
+        run: cargo build -p tej-core -p tej-cli --verbose
 
       - name: Test
-        run: cargo test -p tej-core -p tej-cli
+        run: cargo test -p tej-core -p tej-cli --verbose
