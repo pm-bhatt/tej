@@ -59,6 +59,32 @@ Download from [Releases](https://github.com/pm-bhatt/tej/releases) for:
 - iOS (coming soon)
 - Android (coming soon)
 
+### Web App (Browser)
+
+Run directly in your browser - no installation needed:
+
+**Live URL**: https://tej-speed.pages.dev (or deploy your own)
+
+Features:
+- Same honest measurements as CLI
+- Runs entirely in browser (WASM)
+- ~8KB total size
+- No telemetry, no tracking
+
+To run locally:
+```bash
+cd apps/tej-web
+python3 -m http.server 8000
+# Open http://localhost:8000
+```
+
+To build from source:
+```bash
+rustup target add wasm32-unknown-unknown
+cargo install wasm-pack
+./build-web.sh
+```
+
 ### Build from Source
 
 ```bash
